@@ -1,0 +1,68 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.column {
+  background: #eef2f7;
+  border-radius: 28px;
+  padding: 18px;
+}
+
+.columnHeader {
+  height: 28px;
+  border-radius: 10px;
+  background: #dbe2ea;
+  margin-bottom: 18px;
+}
+
+.taskCard {
+  background: var(--color-bg-card);
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.taskTitle {
+  height: 18px;
+  width: 80%;
+  background: #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.taskText {
+  height: 12px;
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.taskTextSmall {
+  height: 12px;
+  width: 70%;
+  background: #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.footer {
+  height: 28px;
+  background: #e5e7eb;
+  border-radius: 999px;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 1200px) {
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

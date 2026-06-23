@@ -1,0 +1,52 @@
+.emptyState {
+  width: 100%;
+  min-height: 520px;
+  background: var(--color-bg-card);
+  border: 1px solid #e5e7eb;
+  border-radius: 32px;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.iconWrapper {
+  width: 110px;
+  height: 110px;
+  border-radius: 30px;
+  background: linear-gradient(
+    135deg,
+    #eff6ff,
+    #dbeafe
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.description {
+  max-width: 450px;
+  color: #6b7280;
+  line-height: 2;
+}
+
+.actionButton {
+  height: 56px;
+  padding: 0 28px;
+  border: none;
+  border-radius: 18px;
+  background: #2563eb;
+  color: var(--color-bg-card);
+  font-weight: 700;
+  cursor: pointer;
+}

@@ -1,0 +1,81 @@
+:root {
+  /* Primary */
+
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: #dbeafe;
+  --color-primary-soft: #eff6ff;
+
+  /* Success */
+
+  --color-success: #16a34a;
+  --color-success-light: #dcfce7;
+
+  /* Warning */
+
+  --color-warning: #f59e0b;
+  --color-warning-light: #fef3c7;
+
+  /* Danger */
+
+  --color-danger: #dc2626;
+  --color-danger-light: #fee2e2;
+
+  /* Backgrounds */
+
+  --color-bg-page: #f6f8fc;
+  --color-bg-card: #ffffff;
+  --color-bg-soft: #f8fafc;
+  --color-bg-hover: #f1f5f9;
+
+  /* Text */
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6b7280;
+  --color-text-light: #94a3b8;
+  --color-text-white: #ffffff;
+
+  /* Borders */
+
+  --color-border: #e5e7eb;
+  --color-border-light: #dbe2ea;
+
+  /* Shadows */
+
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 15px 40px rgba(15, 23, 42, 0.06);
+
+  /* Radius */
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 32px;
+  --radius-full: 999px;
+
+  /* Badge */
+
+  --status-todo-bg: #f1f5f9;
+  --status-todo-text: #475569;
+
+  --status-progress-bg: #dbeafe;
+  --status-progress-text: #2563eb;
+
+  --status-review-bg: #fef3c7;
+  --status-review-text: #d97706;
+
+  --status-done-bg: #dcfce7;
+  --status-done-text: #16a34a;
+
+  /* Skeleton */
+
+  --skeleton-base: #e5e7eb;
+  --skeleton-highlight: #f3f4f6;
+
+  /* Animation */
+
+  --transition: 0.3s ease;
+}

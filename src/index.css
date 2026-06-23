@@ -1,0 +1,44 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "yekan";
+  src: url("/public/fonts/YekanBakhFaNum-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+* {
+  margin: 0;
+  font-family: "yekan" !important;
+}
+
+html, body {
+  height: 100%;
+  
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  direction: rtl;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}

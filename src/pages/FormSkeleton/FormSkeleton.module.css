@@ -1,0 +1,41 @@
+.form {
+  background: var(--color-bg-card);
+  border-radius: 28px;
+  padding: 32px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.title {
+  width: 220px;
+  height: 30px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  margin-bottom: 24px;
+}
+
+.input {
+  height: 56px;
+  background: #e5e7eb;
+  border-radius: 16px;
+  margin-bottom: 18px;
+}
+
+.textarea {
+  height: 180px;
+  background: #e5e7eb;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.button {
+  height: 56px;
+  width: 180px;
+  background: #e5e7eb;
+  border-radius: 16px;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}

@@ -1,0 +1,148 @@
+.membersPage {
+  min-height: 100vh;
+  background: var(--color-bg-page);
+  padding: 40px;
+  direction: rtl;
+}
+
+.pageContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.pageTitle {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.pageDescription {
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+.addMemberButton {
+  height: 56px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 18px;
+  background: #2563eb;
+  color: var(--color-bg-card);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tableCard {
+  background: var(--color-bg-card);
+  border-radius: 28px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.05);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.membersTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.membersTable thead {
+  background: var(--color-bg-soft);
+}
+
+.membersTable th {
+  text-align: right;
+  padding: 22px 24px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.membersTable td {
+  padding: 22px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--color-text-primary);
+  font-size: 14px;
+}
+
+.memberInfo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.memberAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #2563eb;
+  color: var(--color-bg-card);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memberName {
+  font-weight: 600;
+}
+
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.activeStatus {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pendingStatus {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.membersTable tbody tr:hover {
+  background: #fafcff;
+}
+
+@media (max-width: 768px) {
+  .membersPage {
+    padding: 20px;
+  }
+
+  .pageHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+}
