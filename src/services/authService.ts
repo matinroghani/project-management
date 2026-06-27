@@ -1,10 +1,17 @@
 import { v4 as uuidv4 } from "uuid";
 import type { User } from "../types/auth";
 
-const USER_KEY = "users"
-const CURRENT_USER_KEY = "currentUser"
+const USER_KEY = "users";
+const CURRENT_USER_KEY = "currentUser";
 
-export const register = (username: string, password: string) => {
+export const register = (
+  username: string,
+  password: string,
+  fullName: string,
+  email: string,
+  role: string,
+  phoneNumber: string,
+) => {
   const users: User[] = JSON.parse(localStorage.getItem(USER_KEY) || "[]");
   const existingUser = users.find((user) => user.username === username);
   if (existingUser) {
@@ -12,6 +19,10 @@ export const register = (username: string, password: string) => {
   }
   const newUser: User = {
     id: uuidv4(),
+    fullName,
+    email,
+    role,
+    phoneNumber,
     username,
     password,
   };

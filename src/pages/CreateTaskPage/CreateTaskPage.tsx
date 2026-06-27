@@ -16,13 +16,12 @@ import {
 import { createTask } from "../../services/taskService";
 import { toast } from "react-toastify";
 import { DatePicker } from "@mui/x-date-pickers";
+import { getProjects } from "../../services/dashboardService";
 
 export default function CreateTaskPage() {
   const navigate = useNavigate();
+  const project = getProjects();
   const onSubmit = async (data: createTaskFormData) => {
-    // const formattedDueDate = data.dueDate
-    //   ? data.dueDate.format("YYYY-MM-DD")
-    //   : null;
     try {
       createTask({
         title: data.title,
@@ -30,7 +29,7 @@ export default function CreateTaskPage() {
         status: data.status,
         dueDate: data.dueDate.toISOString(),
         priority: data.priority,
-        projectId: "temp",
+        projectId: data.projectId,
       });
       toast.success("تسک اضافه شد!");
       navigate("/kanban");
@@ -53,6 +52,7 @@ export default function CreateTaskPage() {
       status: "todo",
       priority: "medium",
       dueDate: null,
+      projectId: ""
     },
   });
 
@@ -99,6 +99,43 @@ export default function CreateTaskPage() {
             onSubmit={handleSubmit(onSubmit)}
             sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}
           >
+            {/* Project */}
+
+            <Controller
+              name="projectId"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  select
+                  label="پروژه"
+                  {...field}
+                  error={!!errors.projectId}
+                  helperText={errors.projectId?.message}
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "14px",
+                      background: "#fafafa",
+                      transition: "0.2s",
+                      "&:hover": {
+                        background: "#fff",
+                      },
+                      "&.Mui-focused": {
+                        background: "#fff",
+                        boxShadow: "0 0 0 3px rgba(37,99,235,0.12)",
+                      },
+                    },
+                  }}
+                >
+                  {project.map((project) => (
+                    <MenuItem key={project.id} value={project.id}>
+                      {project.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
+
             {/* Title */}
             <TextField
               label="عنوان تسک"

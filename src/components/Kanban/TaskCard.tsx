@@ -3,19 +3,25 @@ import { Link as RouterLink } from "react-router-dom";
 import type { Task } from "../../types/task";
 import { priorityConfig } from "./taskConfig";
 import { useDraggable } from "@dnd-kit/core";
+import type { Project } from "../../types/project";
 
 type TaskCardProps = {
   task: Task;
+  projects: Project[];
 };
 
-export default function TaskCard({ task }: TaskCardProps) {
+export default function TaskCard({ task, projects }: TaskCardProps) {
   const priority = priorityConfig[task.priority];
+
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });
+
   const style = transform
     ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` }
     : undefined;
+
+  const project = projects.find((p) => p.id === task.projectId);
   return (
     <Card
       ref={setNodeRef}
@@ -37,16 +43,19 @@ export default function TaskCard({ task }: TaskCardProps) {
         },
       }}
     >
-      <Typography
-        sx={{
-          fontSize: "15px",
-          fontWeight: 700,
-          color: "#111827",
-          mb: 1.25,
-        }}
-      >
-        {task.title}
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1.25 }}>
+        <Chip size="small" label={project?.name} />
+
+        <Typography
+          sx={{
+            fontSize: "15px",
+            fontWeight: 700,
+            color: "#111827",
+          }}
+        >
+          {task.title}
+        </Typography>
+      </Box>
 
       <Typography
         sx={{

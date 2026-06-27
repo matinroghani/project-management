@@ -1,193 +1,444 @@
-import styles from "./ProjectDetailsPage.module.css";
+import { Avatar, Box, Card, Typography } from "@mui/material";
+import ProjectStats from "../../components/Project/ProjectStats";
+import { useParams } from "react-router-dom";
+import { getProjects, getTasks } from "../../services/dashboardService";
+import { getProjectStats } from "../../utils/projectStats";
+import { toJalali } from "../../utils/date";
+import {
+  projectPriorityConfig,
+  projectStatusConfig,
+} from "../../components/Project/projectConfig";
+import ProgressProject from "../../components/Project/ProgressProject";
 
 export default function ProjectDetailsPage() {
+  const { id } = useParams();
+
+  const project = getProjects().find((p) => p.id === id);
+
+  if (!project) {
+    return <Typography>پروژه پیدا نشد</Typography>;
+  }
+
+  const tasks = getTasks();
+
+  const projectStats = getProjectStats(project.id, tasks);
+
+  const projectStatsConfig = [
+    { label: "وضعیت", value: projectStatusConfig[project.status] },
+    { label: "اولویت", value: projectPriorityConfig[project.priority] },
+    { label: "تاریخ ایجاد", value: toJalali(project?.createdAt) || "-" },
+    { label: "تعداد تسک‌ها", value: projectStats.taskCount?.toString() || "۰" },
+  ];
+
+  const progress= projectStats.progress
+
+  if (!project) {
+    return <Typography>تسک پیدا نشد</Typography>;
+  }
+
   return (
-    <div className={styles.projectDetailsPage}>
-      <div className={styles.pageContainer}>
-        <header className={styles.pageHeader}>
-          <div>
-            <h1 className={styles.pageTitle}>
-              سیستم مدیریت پروژه
-            </h1>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        bgcolor: "#f6f8fb",
+        p: { xs: 2.5, md: 5 },
+        direction: "rtl",
+      }}
+    >
+      <Box
+        sx={{
+          maxWidth: 1400,
+          mx: "auto",
+        }}
+      >
+        {/* Header */}
+        <Box sx={{ mb: 4 }}>
+          <Typography
+            sx={{
+              fontSize: { xs: "28px", md: "34px" },
+              fontWeight: 700,
+              color: "text.primary",
+              mb: 1,
+            }}
+          >
+            سیستم مدیریت پروژه
+          </Typography>
 
-            <p className={styles.pageDescription}>
-              اطلاعات کامل پروژه و وضعیت فعلی آن
-            </p>
-          </div>
-        </header>
+          <Typography
+            sx={{
+              color: "#6b7280",
+            }}
+          >
+            اطلاعات کامل پروژه و وضعیت فعلی آن
+          </Typography>
+        </Box>
 
-        <section className={styles.topSection}>
-          <div className={styles.projectInfoCard}>
-            <h2 className={styles.sectionTitle}>
+        {/* Top Section */}
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", lg: "2fr 1fr" },
+            gap: 3,
+            mb: 3,
+          }}
+        >
+          {/* Project Info Card */}
+          <Card
+            elevation={0}
+            sx={{
+              bgcolor: "background.paper",
+              borderRadius: "28px",
+              p: { xs: 3, md: 4 },
+              border: "1px solid #e5e7eb",
+              boxShadow: "0 15px 40px rgba(15, 23, 42, 0.05)",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "20px",
+                fontWeight: 700,
+                color: "text.primary",
+                mb: 3,
+              }}
+            >
               اطلاعات پروژه
-            </h2>
+            </Typography>
 
-            <div className={styles.infoGrid}>
-              <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>
-                  وضعیت
-                </span>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+                gap: 3,
+              }}
+            >
+              {/* PROJECT STATS */}
+              {projectStatsConfig.map((stat) => (
+                <ProjectStats key={stat.label} data={stat} />
+              ))}
+            </Box>
+          </Card>
 
-                <span className={styles.infoValue}>
-                  فعال
-                </span>
-              </div>
+          {/* Progress Card */}
+          <ProgressProject progress={progress} />
 
-              <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>
-                  اولویت
-                </span>
 
-                <span className={styles.infoValue}>
-                  زیاد
-                </span>
-              </div>
+        </Box>
 
-              <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>
-                  تاریخ ایجاد
-                </span>
-
-                <span className={styles.infoValue}>
-                  ۱۴۰۵/۰۳/۰۱
-                </span>
-              </div>
-
-              <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>
-                  تعداد تسک‌ها
-                </span>
-
-                <span className={styles.infoValue}>
-                  ۲۴
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.progressCard}>
-            <h2 className={styles.sectionTitle}>
-              درصد پیشرفت
-            </h2>
-
-            <div className={styles.progressWrapper}>
-              <div className={styles.progressBar}>
-                <div className={styles.progressFill} />
-              </div>
-
-              <span className={styles.progressValue}>
-                ۷۵٪
-              </span>
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.bottomSection}>
-          <div className={styles.membersCard}>
-            <h2 className={styles.sectionTitle}>
+        {/* Bottom Section */}
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", lg: "1.2fr 1fr" },
+            gap: 3,
+          }}
+        >
+          {/* Members Card */}
+          <Card
+            elevation={0}
+            sx={{
+              bgcolor: "background.paper",
+              borderRadius: "28px",
+              p: { xs: 3, md: 4 },
+              border: "1px solid #e5e7eb",
+              boxShadow: "0 15px 40px rgba(15, 23, 42, 0.05)",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "20px",
+                fontWeight: 700,
+                color: "text.primary",
+                mb: 3,
+              }}
+            >
               اعضای پروژه
-            </h2>
+            </Typography>
 
-            <div className={styles.membersList}>
-              <div className={styles.memberItem}>
-                <div className={styles.memberAvatar}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  p: "14px",
+                  borderRadius: "18px",
+                  bgcolor: "#f3f4f6",
+                }}
+              >
+                <Avatar
+                  sx={{
+                    width: 52,
+                    height: 52,
+                    bgcolor: "#2563eb",
+                    color: "background.paper",
+                    fontWeight: 700,
+                  }}
+                >
                   م
-                </div>
+                </Avatar>
 
-                <div>
-                  <h4 className={styles.memberName}>
+                <Box>
+                  <Typography
+                    sx={{
+                      color: "text.primary",
+                      fontSize: "15px",
+                      fontWeight: 600,
+                    }}
+                  >
                     محمد رضایی
-                  </h4>
+                  </Typography>
 
-                  <span className={styles.memberRole}>
+                  <Typography
+                    sx={{
+                      color: "#6b7280",
+                      fontSize: "13px",
+                    }}
+                  >
                     Frontend Developer
-                  </span>
-                </div>
-              </div>
+                  </Typography>
+                </Box>
+              </Box>
 
-              <div className={styles.memberItem}>
-                <div className={styles.memberAvatar}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  p: "14px",
+                  borderRadius: "18px",
+                  bgcolor: "#f3f4f6",
+                }}
+              >
+                <Avatar
+                  sx={{
+                    width: 52,
+                    height: 52,
+                    bgcolor: "#2563eb",
+                    color: "background.paper",
+                    fontWeight: 700,
+                  }}
+                >
                   ا
-                </div>
+                </Avatar>
 
-                <div>
-                  <h4 className={styles.memberName}>
+                <Box>
+                  <Typography
+                    sx={{
+                      color: "text.primary",
+                      fontSize: "15px",
+                      fontWeight: 600,
+                    }}
+                  >
                     امیر احمدی
-                  </h4>
+                  </Typography>
 
-                  <span className={styles.memberRole}>
+                  <Typography
+                    sx={{
+                      color: "#6b7280",
+                      fontSize: "13px",
+                    }}
+                  >
                     UI Designer
-                  </span>
-                </div>
-              </div>
+                  </Typography>
+                </Box>
+              </Box>
 
-              <div className={styles.memberItem}>
-                <div className={styles.memberAvatar}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  p: "14px",
+                  borderRadius: "18px",
+                  bgcolor: "#f3f4f6",
+                }}
+              >
+                <Avatar
+                  sx={{
+                    width: 52,
+                    height: 52,
+                    bgcolor: "#2563eb",
+                    color: "background.paper",
+                    fontWeight: 700,
+                  }}
+                >
                   س
-                </div>
+                </Avatar>
 
-                <div>
-                  <h4 className={styles.memberName}>
+                <Box>
+                  <Typography
+                    sx={{
+                      color: "text.primary",
+                      fontSize: "15px",
+                      fontWeight: 600,
+                    }}
+                  >
                     سارا محمدی
-                  </h4>
+                  </Typography>
 
-                  <span className={styles.memberRole}>
+                  <Typography
+                    sx={{
+                      color: "#6b7280",
+                      fontSize: "13px",
+                    }}
+                  >
                     Project Manager
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Card>
 
-          <div className={styles.statisticsCard}>
-            <h2 className={styles.sectionTitle}>
+          {/* Statistics Card */}
+          <Card
+            elevation={0}
+            sx={{
+              bgcolor: "background.paper",
+              borderRadius: "28px",
+              p: { xs: 3, md: 4 },
+              border: "1px solid #e5e7eb",
+              boxShadow: "0 15px 40px rgba(15, 23, 42, 0.05)",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "20px",
+                fontWeight: 700,
+                color: "text.primary",
+                mb: 3,
+              }}
+            >
               آمار پروژه
-            </h2>
+            </Typography>
 
-            <div className={styles.statisticsGrid}>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+                gap: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  bgcolor: "#f3f4f6",
+                  borderRadius: "18px",
+                  p: "20px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#6b7280",
+                    fontSize: "13px",
+                  }}
+                >
                   تسک‌های فعال
-                </span>
+                </Typography>
 
-                <h3 className={styles.statValue}>
+                <Typography
+                  sx={{
+                    mt: "10px",
+                    color: "text.primary",
+                    fontSize: "28px",
+                    fontWeight: 700,
+                  }}
+                >
                   ۱۲
-                </h3>
-              </div>
+                </Typography>
+              </Box>
 
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>
+              <Box
+                sx={{
+                  bgcolor: "#f3f4f6",
+                  borderRadius: "18px",
+                  p: "20px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#6b7280",
+                    fontSize: "13px",
+                  }}
+                >
                   تسک‌های تکمیل شده
-                </span>
+                </Typography>
 
-                <h3 className={styles.statValue}>
+                <Typography
+                  sx={{
+                    mt: "10px",
+                    color: "text.primary",
+                    fontSize: "28px",
+                    fontWeight: 700,
+                  }}
+                >
                   ۱۸
-                </h3>
-              </div>
+                </Typography>
+              </Box>
 
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>
+              <Box
+                sx={{
+                  bgcolor: "#f3f4f6",
+                  borderRadius: "18px",
+                  p: "20px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#6b7280",
+                    fontSize: "13px",
+                  }}
+                >
                   اعضا
-                </span>
+                </Typography>
 
-                <h3 className={styles.statValue}>
+                <Typography
+                  sx={{
+                    mt: "10px",
+                    color: "text.primary",
+                    fontSize: "28px",
+                    fontWeight: 700,
+                  }}
+                >
                   ۶
-                </h3>
-              </div>
+                </Typography>
+              </Box>
 
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>
+              <Box
+                sx={{
+                  bgcolor: "#f3f4f6",
+                  borderRadius: "18px",
+                  p: "20px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#6b7280",
+                    fontSize: "13px",
+                  }}
+                >
                   فایل‌ها
-                </span>
+                </Typography>
 
-                <h3 className={styles.statValue}>
+                <Typography
+                  sx={{
+                    mt: "10px",
+                    color: "text.primary",
+                    fontSize: "28px",
+                    fontWeight: 700,
+                  }}
+                >
                   ۳۴
-                </h3>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
+                </Typography>
+              </Box>
+            </Box>
+          </Card>
+        </Box>
+      </Box>
+    </Box>
   );
 }

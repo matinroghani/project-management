@@ -17,6 +17,7 @@ export default function KanbanBoardPage() {
 
   const [tasks, setTasks] = useState(getTasks());
 
+
   const tasksByStatus = useMemo(() => {
     return {
       todo: tasks.filter((t) => t.status === "todo"),

@@ -55,7 +55,7 @@ export default function App() {
           <Route path="/create-task" element={<CreateTaskPage/>} />
           <Route path="/tasks/:id" element={<TaskDetailsPage/>} />
           <Route path="/create-project" element={<CreateProjectPage />} />
-          <Route path="/project-detail" element={<ProjectDetailsPage />} />
+          <Route path="/projects/:id" element={<ProjectDetailsPage />} />
         </Route>
 
         {/* fallback */}

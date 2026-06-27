@@ -1,135 +1,290 @@
-import styles from "./ProfilePage.module.css";
+import { Box, Card, Grid, Stack, Switch, Typography } from "@mui/material";
+import { getCurrentUser } from "../../services/authService";
+import UserDetail from "../../components/Profile/UserDetail";
+import UserAvatar from "../../components/Common/UserAvatar";
 
 export default function ProfilePage() {
+  const currentUser = getCurrentUser();
+
+  const profileConfig = [
+    { label: "نام کامل", value: currentUser?.fullName },
+    { label: "ایمیل ", value: currentUser?.email },
+    { label: " نقش", value: currentUser?.role },
+    { label: " شماره تماس ", value: currentUser?.phoneNumber },
+  ];
+
   return (
-      <div className={`${styles.pageContainer} ${styles.profilePage}`}>
-        <header className={styles.pageHeader}>
-          <h1 className={styles.pageTitle}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        bgcolor: "#f6f8fb",
+        p: { xs: 2.5, md: 5 },
+        direction: "rtl",
+      }}
+    >
+      <Box
+        sx={{
+          maxWidth: 1400,
+          mx: "auto",
+        }}
+      >
+        {/* Header */}
+
+        <Box sx={{ mb: 4 }}>
+          <Typography
+            sx={{
+              fontSize: "34px",
+              fontWeight: 700,
+              color: "#111827",
+              mb: 1,
+            }}
+          >
             پروفایل کاربری
-          </h1>
+          </Typography>
 
-          <p className={styles.pageDescription}>
+          <Typography
+            sx={{
+              color: "#6b7280",
+            }}
+          >
             مدیریت اطلاعات شخصی و تنظیمات حساب
-          </p>
-        </header>
+          </Typography>
+        </Box>
 
-        <section className={styles.profileLayout}>
-          <div className={styles.profileCard}>
-            <div className={styles.avatarSection}>
-              <div className={styles.profileAvatar}>
-                م
-              </div>
+        <Grid container spacing={3}>
+          {/* Left Card */}
 
-              <h2 className={styles.userName}>
-                محمد رضایی
-              </h2>
+          <Grid size={{ xs: 12, lg: 3 }}>
+            <Card
+              elevation={0}
+              sx={{
+                p: 3.5,
+                borderRadius: "28px",
+                border: "1px solid #e5e7eb",
+                boxShadow: "0 15px 40px rgba(15,23,42,.05)",
+                textAlign: "center",
+                height: "100%",
+              }}
+            >
+              <UserAvatar
+                src={currentUser?.avatar ?? undefined}
+                alt={currentUser?.fullName}
+                sx={{
+                  width: 130,
+                  height: 130,
+                  mx: "auto",
+                  mb: 3,
+                }}
+              />
 
-              <p className={styles.userRole}>
-                Frontend Developer
-              </p>
-            </div>
-          </div>
+              <Typography
+                sx={{
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: "#111827",
+                  mb: 1,
+                }}
+              >
+                {currentUser?.fullName}
+              </Typography>
 
-          <div className={styles.contentSection}>
-            <div className={styles.infoCard}>
-              <h2 className={styles.sectionTitle}>
-                اطلاعات کاربر
-              </h2>
+              <Typography
+                sx={{
+                  color: "#6b7280",
+                }}
+              >
+                {currentUser?.role}
+              </Typography>
+            </Card>
+          </Grid>
 
-              <div className={styles.infoGrid}>
-                <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>
-                    نام کامل
-                  </span>
+          {/* Right Section */}
 
-                  <span className={styles.infoValue}>
-                    محمد رضایی
-                  </span>
-                </div>
+          <Grid size={{ xs: 12, lg: 9 }}>
+            <Stack spacing={3}>
+              {/* User Info */}
 
-                <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>
-                    ایمیل
-                  </span>
+              <Card
+                elevation={0}
+                sx={{
+                  p: 3.5,
+                  borderRadius: "28px",
+                  border: "1px solid #e5e7eb",
+                  boxShadow: "0 15px 40px rgba(15,23,42,.05)",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: "#111827",
+                    mb: 3,
+                  }}
+                >
+                  اطلاعات کاربر
+                </Typography>
 
-                  <span className={styles.infoValue}>
-                    mohammad@gmail.com
-                  </span>
-                </div>
+                <Grid container spacing={2.5}>
+                  {profileConfig.map((u) => (
+                    <UserDetail key={u.label} data={u} />
+                  ))}
+                </Grid>
+              </Card>
 
-                <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>
-                    نقش
-                  </span>
+              {/* Settings */}
 
-                  <span className={styles.infoValue}>
-                    Frontend Developer
-                  </span>
-                </div>
+              <Card
+                elevation={0}
+                sx={{
+                  p: 3.5,
+                  borderRadius: "28px",
+                  border: "1px solid #e5e7eb",
+                  boxShadow: "0 15px 40px rgba(15,23,42,.05)",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: "#111827",
+                    mb: 3,
+                  }}
+                >
+                  تنظیمات حساب
+                </Typography>
 
-                <div className={styles.infoItem}>
-                  <span className={styles.infoLabel}>
-                    شماره تماس
-                  </span>
+                <Stack spacing={2.25}>
+                  <Box
+                    sx={{
+                      p: 2.5,
+                      borderRadius: "18px",
+                      bgcolor: "#f8fafc",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: {
+                        xs: "flex-start",
+                        sm: "center",
+                      },
+                      flexDirection: {
+                        xs: "column",
+                        sm: "row",
+                      },
+                      gap: 2,
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: 700,
+                          mb: 0.5,
+                        }}
+                      >
+                        اعلان‌های ایمیلی
+                      </Typography>
 
-                  <span className={styles.infoValue}>
-                    +98 912 000 0000
-                  </span>
-                </div>
-              </div>
-            </div>
+                      <Typography
+                        sx={{
+                          color: "#6b7280",
+                          fontSize: 13,
+                        }}
+                      >
+                        دریافت بروزرسانی‌ها از طریق ایمیل
+                      </Typography>
+                    </Box>
 
-            <div className={styles.settingsCard}>
-              <h2 className={styles.sectionTitle}>
-                تنظیمات حساب
-              </h2>
+                    <Switch defaultChecked />
+                  </Box>
 
-              <div className={styles.settingsList}>
-                <div className={styles.settingItem}>
-                  <div>
-                    <h4 className={styles.settingTitle}>
-                      اعلان‌های ایمیلی
-                    </h4>
+                  <Box
+                    sx={{
+                      p: 2.5,
+                      borderRadius: "18px",
+                      bgcolor: "#f8fafc",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: {
+                        xs: "flex-start",
+                        sm: "center",
+                      },
+                      flexDirection: {
+                        xs: "column",
+                        sm: "row",
+                      },
+                      gap: 2,
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: 700,
+                          mb: 0.5,
+                        }}
+                      >
+                        حالت دو مرحله‌ای
+                      </Typography>
 
-                    <p className={styles.settingDescription}>
-                      دریافت بروزرسانی‌ها از طریق ایمیل
-                    </p>
-                  </div>
+                      <Typography
+                        sx={{
+                          color: "#6b7280",
+                          fontSize: 13,
+                        }}
+                      >
+                        افزایش امنیت حساب کاربری
+                      </Typography>
+                    </Box>
 
-                  <div className={styles.toggle}></div>
-                </div>
+                    <Switch defaultChecked />
+                  </Box>
 
-                <div className={styles.settingItem}>
-                  <div>
-                    <h4 className={styles.settingTitle}>
-                      حالت دو مرحله‌ای
-                    </h4>
+                  <Box
+                    sx={{
+                      p: 2.5,
+                      borderRadius: "18px",
+                      bgcolor: "#f8fafc",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: {
+                        xs: "flex-start",
+                        sm: "center",
+                      },
+                      flexDirection: {
+                        xs: "column",
+                        sm: "row",
+                      },
+                      gap: 2,
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: 15,
+                          fontWeight: 700,
+                          mb: 0.5,
+                        }}
+                      >
+                        نمایش وضعیت آنلاین
+                      </Typography>
 
-                    <p className={styles.settingDescription}>
-                      افزایش امنیت حساب کاربری
-                    </p>
-                  </div>
+                      <Typography
+                        sx={{
+                          color: "#6b7280",
+                          fontSize: 13,
+                        }}
+                      >
+                        نمایش وضعیت فعالیت به سایر اعضا
+                      </Typography>
+                    </Box>
 
-                  <div className={styles.toggle}></div>
-                </div>
-
-                <div className={styles.settingItem}>
-                  <div>
-                    <h4 className={styles.settingTitle}>
-                      نمایش وضعیت آنلاین
-                    </h4>
-
-                    <p className={styles.settingDescription}>
-                      نمایش وضعیت فعالیت به سایر اعضا
-                    </p>
-                  </div>
-
-                  <div className={styles.toggle}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+                    <Switch defaultChecked />
+                  </Box>
+                </Stack>
+              </Card>
+            </Stack>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 }

@@ -2,6 +2,7 @@ import { Box, Card, Chip, Stack, Typography } from "@mui/material";
 import { useDroppable } from "@dnd-kit/core";
 import TaskCard from "./TaskCard";
 import type { Task } from "../../types/task";
+import { getProjects } from "../../services/dashboardService";
 
 type Props = {
   id: Task["status"];
@@ -19,6 +20,7 @@ export default function KanbanColumn({
   tasks,
 }: Props) {
   const { setNodeRef } = useDroppable({ id });
+  const projects = getProjects()
 
   return (
     <Card
@@ -108,7 +110,7 @@ export default function KanbanColumn({
       >
         <Stack spacing={2}>
           {tasks.map((task) => (
-            <TaskCard key={task.id} task={task} />
+            <TaskCard key={task.id} task={task} projects={projects} />
           ))}
         </Stack>
       </Box>
