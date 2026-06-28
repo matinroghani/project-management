@@ -1,7 +1,7 @@
 import { Box, Card, Chip, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import type { Task } from "../../types/task";
-import { priorityConfig } from "./taskConfig";
+import { priorityConfig } from "../../config/taskConfig";
 import { useDraggable } from "@dnd-kit/core";
 import type { Project } from "../../types/project";
 

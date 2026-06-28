@@ -1,104 +1,74 @@
-import styles from "./NotificationsPage.module.css";
+import { Box, Card, Typography } from "@mui/material";
+import NotificationCard from "../../components/Activity/NotificationCard";
+import { getActivities } from "../../services/activityService";
 
 export default function NotificationsPage() {
+  const activities = getActivities()
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .slice(0, 4);
+
   return (
-      <div className={`${styles.pageContainer} ${styles.notificationsPage}`}>
-        <header className={styles.pageHeader}>
-          <div>
-            <h1 className={styles.pageTitle}>
-              اعلان‌ها
-            </h1>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        bgcolor: "#f6f8fb",
+        p: { xs: 2.5, md: 5 },
+        direction: "rtl",
+      }}
+    >
+      <Box
+        sx={{
+          maxWidth: 1100,
+          mx: "auto",
+        }}
+      >
+        {/* Header */}
+        <Box sx={{ mb: 4 }}>
+          <Typography
+            sx={{
+              fontSize: { xs: "28px", md: "34px" },
+              fontWeight: 700,
+              color: "text.primary",
+              mb: 1,
+            }}
+          >
+            اعلان‌ها
+          </Typography>
 
-            <p className={styles.pageDescription}>
-              آخرین فعالیت‌ها و بروزرسانی‌های سیستم
-            </p>
-          </div>
-        </header>
+          <Typography
+            sx={{
+              color: "#6b7280",
+            }}
+          >
+            آخرین فعالیت‌ها و بروزرسانی‌های سیستم
+          </Typography>
+        </Box>
 
-        <section className={styles.notificationsCard}>
-          <div className={styles.notificationsList}>
-            <article className={styles.notificationItem}>
-              <div className={styles.notificationIcon}>
-                ✓
-              </div>
-
-              <div className={styles.notificationContent}>
-                <p className={styles.notificationText}>
-                  تسک «طراحی داشبورد» با موفقیت تکمیل شد.
-                </p>
-
-                <span className={styles.notificationTime}>
-                  ۵ دقیقه پیش
-                </span>
-              </div>
-            </article>
-
-            <article className={styles.notificationItem}>
-              <div className={styles.notificationIcon}>
-                📁
-              </div>
-
-              <div className={styles.notificationContent}>
-                <p className={styles.notificationText}>
-                  پروژه جدیدی با نام «سیستم مدیریت منابع»
-                  ایجاد شد.
-                </p>
-
-                <span className={styles.notificationTime}>
-                  ۲ ساعت پیش
-                </span>
-              </div>
-            </article>
-
-            <article className={styles.notificationItem}>
-              <div className={styles.notificationIcon}>
-                💬
-              </div>
-
-              <div className={styles.notificationContent}>
-                <p className={styles.notificationText}>
-                  یک کامنت جدید روی تسک شما ثبت شد.
-                </p>
-
-                <span className={styles.notificationTime}>
-                  ۴ ساعت پیش
-                </span>
-              </div>
-            </article>
-
-            <article className={styles.notificationItem}>
-              <div className={styles.notificationIcon}>
-                👤
-              </div>
-
-              <div className={styles.notificationContent}>
-                <p className={styles.notificationText}>
-                  عضو جدیدی به پروژه اضافه شد.
-                </p>
-
-                <span className={styles.notificationTime}>
-                  دیروز
-                </span>
-              </div>
-            </article>
-
-            <article className={styles.notificationItem}>
-              <div className={styles.notificationIcon}>
-                🔔
-              </div>
-
-              <div className={styles.notificationContent}>
-                <p className={styles.notificationText}>
-                  مهلت تحویل یک تسک در حال نزدیک شدن است.
-                </p>
-
-                <span className={styles.notificationTime}>
-                  ۲ روز پیش
-                </span>
-              </div>
-            </article>
-          </div>
-        </section>
-      </div>
+        {/* Notifications Card */}
+        <Card
+          elevation={0}
+          sx={{
+            bgcolor: "background.paper",
+            borderRadius: "28px",
+            border: "1px solid #e5e7eb",
+            p: 3,
+            boxShadow: "0 15px 40px rgba(15, 23, 42, 0.05)",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            {/* Notification */}
+            {activities.map((activity) => (
+              <NotificationCard key={activity.id} activity={activity} />
+            ))}
+          </Box>
+        </Card>
+      </Box>
+    </Box>
   );
 }

@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import type { Project } from "../types/project";
+import { addActivity } from "./activityService";
 
 const PROJECT_KEY = "projects";
 
@@ -22,6 +23,12 @@ export const createProject = (data: Omit<Project, "id" | "createdAt">) => {
   projects.push(newProject);
 
   localStorage.setItem(PROJECT_KEY, JSON.stringify(projects));
+
+  addActivity({
+    id: uuidv4(),
+    type: "project_created",
+    createdAt: Date.now(),
+  });
 
   return newProject;
 };

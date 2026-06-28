@@ -10,7 +10,7 @@ import { getTasks } from "../../services/dashboardService";
 import {
   priorityConfig,
   statusConfig,
-} from "../../components/Kanban/taskConfig";
+} from "../../config/taskConfig";
 import { toJalali } from "../../utils/date";
 import CommentSection from "../../components/TaskDetail/CommentSection";
 

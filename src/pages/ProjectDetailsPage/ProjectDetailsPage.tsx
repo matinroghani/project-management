@@ -7,7 +7,7 @@ import { toJalali } from "../../utils/date";
 import {
   projectPriorityConfig,
   projectStatusConfig,
-} from "../../components/Project/projectConfig";
+} from "../../config/projectConfig";
 import ProgressProject from "../../components/Project/ProgressProject";
 
 export default function ProjectDetailsPage() {

@@ -5,7 +5,7 @@ import KanbanColumn from "../../components/Kanban/KanbanColumn";
 import { getTasks } from "../../services/dashboardService";
 import { useMemo, useState } from "react";
 import type { Task } from "../../types/task";
-import { saveTask } from "../../services/taskService";
+import { updateTaskStatus } from "../../services/taskService";
 
 export default function KanbanBoardPage() {
   const columnsConfing = [
@@ -34,18 +34,13 @@ export default function KanbanBoardPage() {
     const taskId = active.id;
     const newStatus = over.id;
 
-    setTasks((prev) => {
-      const updated = prev.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              status: newStatus as Task["status"],
-            }
-          : task,
-      );
-      saveTask(updated);
-      return updated;
-    });
+    const updatedTasks = updateTaskStatus(
+      taskId as string,
+      newStatus as Task["status"]
+    )
+
+    setTasks(updatedTasks)
+
   };
 
   return (

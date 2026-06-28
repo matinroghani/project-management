@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 import {
   projectPriority,
   projectStatus,
-} from "../../components/CreateProject/projectConfigs";
+} from "../../config/projectConfigs";
 
 export default function CreateProjectPage() {
   const navigate = useNavigate();
