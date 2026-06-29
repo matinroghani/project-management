@@ -1,75 +1,198 @@
-# React + TypeScript + Vite
+# ProjectFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Project Management Dashboard built with **React**, **TypeScript**, and **Material UI v7**.
 
-Currently, two official plugins are available:
+ProjectFlow is a responsive Single Page Application (SPA) that simulates a lightweight project management system. It allows users to create projects, manage tasks, monitor project progress, and organize workflows through a clean and responsive interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> **Note:** This project currently uses **Local Storage** as its data source. It is designed as a frontend-focused application without a backend.
 
-## React Compiler
+---
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 📸 Preview
 
-Note: This will impact Vite dev & build performances.
+![Dashboard](./public/preview.png)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✨ Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🔐 Authentication
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* User Registration
+* User Login
+* Protected Routes
+* Persistent Authentication using Local Storage
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 📊 Dashboard
+
+* Dynamic statistics cards
+* Recent projects
+* Recent activities
+* Project overview
+* Task overview
+
+### 📁 Project Management
+
+* Create Project
+* View All Projects
+* Project Details
+* Progress Calculation
+* Project Statistics
+
+### ✅ Task Management
+
+* Create Task
+* Task Details
+* Task Priority
+* Task Status
+* Assign Task to Project
+* Due Date Support
+
+### 📌 Kanban Board
+
+* Todo
+* In Progress
+* Review
+* Done
+
+The project architecture is ready for future Drag & Drop implementation.
+
+### 🔔 Notifications
+
+* Activity timeline
+* Relative time formatting
+* Dynamic notification rendering
+
+### 🎨 User Interface
+
+* Fully Responsive
+* RTL Support
+* Material UI v7
+* Reusable Components
+* Config-driven UI
+
+---
+
+# 🛠 Tech Stack
+
+### Frontend
+
+* React
+* TypeScript
+* React Router DOM
+* Material UI v7
+
+### State Management
+
+* React Hooks
+* Local Storage
+
+### Utilities
+
+* Intl API
+* Utility Functions
+* Config-based Rendering
+
+---
+
+# 📂 Project Structure
+
+```text
+src
+├── assets
+├── components
+├── config
+├── data
+├── layouts
+├── lib
+├── pages
+├── routes
+├── services
+├── styles
+├── types
+├── utils
+└── validations
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The project follows a modular architecture where reusable UI components, utility functions, configuration files, and business logic are separated to improve maintainability and scalability.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 🚀 Key Concepts Implemented
+
+* Component Composition
+* Reusable Components
+* Config-based Rendering
+* Utility-based Business Logic
+* Protected Routing
+* Responsive Layout Design
+* Type-safe Development
+* Clean Folder Structure
+* Local Persistence
+* Dynamic Project Statistics
+* Activity Timeline
+
+---
+
+# ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/matinroghani/project-management.git
 ```
+
+Navigate to the project:
+
+```bash
+cd project-management
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+# 📌 Future Improvements
+
+- Integrate Redux Toolkit for global state management
+- Replace Local Storage with a backend API
+- User-specific projects and tasks
+- Project member management
+- Global search for projects and tasks
+- Internationalization (i18n)
+- Dark / Light theme switching
+- Real-time notifications
+- Task comments
+- File attachments
+
+---
+
+# 🎯 Learning Objectives
+
+This project was developed to improve practical skills in:
+
+* React
+* TypeScript
+* Material UI
+* Routing
+* Responsive Design
+* Component Architecture
+* Code Reusability
+* Clean Code Principles
+* Frontend Project Structure
+
+---
+
+# 📄 License
+
+This project is intended for educational and portfolio purposes.
